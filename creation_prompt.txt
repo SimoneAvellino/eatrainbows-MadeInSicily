@@ -1,0 +1,193 @@
+# 🔧 GPT-5 Prompt: Build a Sicily storefront website (Taormina – Lava Stone & Ceramics)
+
+## 🏝️ Project summary
+
+Create a **modern, artistic storefront website** for a small family company based in **Taormina, Sicily**, specializing in **lava-stone tables** and **hand-painted ceramics**.
+Design inspired by Sicilian **maiolica tiles** — elegant, colorful, and timeless, yet lightweight and performant.
+
+Use the **images provided** (see filenames below) as design and layout references.
+
+---
+
+## 🌐 Website structure
+
+Three main pages:
+
+1. **Home** — immersive landing with fixed background and photo collage section.
+2. **Products** — gallery showcasing artisan creations.
+3. **Contact** — clean contact section with WhatsApp integration.
+
+### Navigation
+
+Persistent top nav with links:
+`Home | Products | Contact`
+Logo on the left, hover underline animation in accent color.
+
+### Footer
+
+Includes Taormina address, social icons, and a thin Sicilian tile motif divider.
+
+---
+
+## 🖼️ Page details
+
+### **1. Home page**
+
+* **Hero section:**
+
+  * Full-screen background (`hero_sicily.jpg`) — fixed (parallax style).
+  * On the **left side**, vertically centered text:
+
+    ```
+    Tavoli in pietra lavica,
+    Ceramiche
+    ```
+  * Use smooth fade-in animation on load.
+  * A subtle scroll indicator (chevron) at bottom.
+
+* **Collage section:**
+
+  * Asymmetric 3-photo layout inspired by the *“Sicily my love”* screenshot.
+  * Images:
+
+    * `collage_sea.jpg`
+    * `collage_couple.jpg`
+    * `collage_car_window.jpg`
+  * Headline: **“Sicily, love at first sight.”**
+  * Caption under each photo:
+
+    * **Title:** *Amore a prima vista*
+    * **Paragraph:** “Dalle colate dell’Etna nascono superfici uniche: tavoli in pietra lavica decorati a mano e ceramiche che custodiscono i colori del Mediterraneo.”
+  * Use **scroll-reveal animations** (fade-up, staggered 150–250 ms).
+
+---
+
+### **2. Products page**
+
+* Masonry or justified image gallery.
+* Hover effect: image scales slightly, caption slides up.
+* Each item shows:
+
+  * Product name
+  * Material tag (e.g. *Pietra lavica smaltata*)
+  * Optional “Request Info” button → `/contact?product=<slug>`
+* Support lightbox modal on click (swipe-friendly on mobile).
+
+---
+
+### **3. Contact page**
+
+* Display:
+
+  * **Phone:** `+39 000 000 0000`
+  * **Email:** `info@tusitio.it`
+  * **WhatsApp button:** `https://wa.me/390000000000`
+* Contact form:
+
+  * Fields: Name, Email/Phone, Message, Product (prefilled from query).
+  * Simple validation, inline errors.
+* Include an embedded or static map of **Taormina**.
+* Decorative border from tile pattern.
+
+---
+
+## 🎨 Design system
+
+### Colors (from tile palette)
+
+| Color           | Hex       | Usage                           |
+| --------------- | --------- | ------------------------------- |
+| Blue Turquoise  | `#54b0ae` | Primary buttons, accents        |
+| Sky Blue        | `#7eaed2` | Hover states, secondary accents |
+| Sunshine Yellow | `#f8db74` | Highlights, ornaments           |
+| Deep Cobalt     | `#03267e` | Headlines, nav                  |
+| Porcelain White | `#e7eae7` | Backgrounds                     |
+
+* Inspired by **Pantone Sicilian tile** photo `tile_palette.jpg`.
+* Add SVG border ornaments using cobalt and yellow curves.
+
+### Typography
+
+* **Headings:** *Playfair Display* or *Cormorant Garamond* (serif, elegant).
+* **Body:** *Inter* or *Lato*.
+* Use variable weights and italics for artistic feel.
+* Hero title: ~72px desktop / ~40px mobile.
+
+---
+
+## ⚙️ Technology stack
+
+### Core technologies
+
+* **Framework:** Next.js 15 (React 19)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Animation:** Framer Motion (for reveal and hover effects)
+* **Gallery:** Lightbox via *react-photo-album* or *simple-react-lightbox*
+* **Form handling:** React Hook Form
+* **Deployment:** Vercel or Netlify (static export ready)
+
+### Assets & performance
+
+* Store all images in `/public/assets/images/`
+* Use `next/image` for responsive optimization.
+* Use `srcset` and lazy loading.
+* Lighthouse performance ≥ 90.
+
+### Accessibility & SEO
+
+* Semantic HTML5 structure.
+* WCAG 2.1 AA contrast compliance.
+* Meta titles, descriptions, OG tags, and local business schema.
+* Add descriptive `alt` text for all images (in Italian + English).
+
+---
+
+## 📱 Responsiveness
+
+* **Mobile-first** layout (min width = 375 px).
+* Breakpoints: 640 px / 1024 px / 1280 px.
+* Collage stacks vertically on small screens.
+* Buttons expand to full width on mobile.
+* Footer tiles scale gracefully.
+
+---
+
+## ✨ Animations
+
+* **Hero fade-in** on load.
+* **Scroll reveal** (fade-up) for images and text.
+* **Hover:** subtle image lift (scale 1.02) with shadow.
+* **Parallax hero** (fixed background effect).
+
+---
+
+## 🧩 Deliverables
+
+* `/` → Home
+* `/products` → Products page
+* `/contact` → Contact page
+* Shared header/footer components.
+* `/styles/` folder with Tailwind config.
+* `README.md` explaining setup, how to update contact info, and how to add new products.
+
+---
+
+## 📁 Assets list
+
+* `hero_sicily.jpg` — hero background
+* `collage_sea.jpg` — sea view
+* `collage_couple.jpg` — couple with scooter
+* `collage_car_window.jpg` — woman in car
+* `tile_palette.jpg` — Pantone Sicilian tile reference
+
+---
+
+### 🔍 Notes for the AI
+
+* Do **not** use heavy CSS frameworks other than Tailwind.
+* Keep bundle light (< 300 KB).
+* Maintain artistic Sicilian feel — colors, curves, and shadows should feel handcrafted.
+* Generate clean, well-commented, and modular code.
+* Use Italian text where shown; rest of UI in English if unspecified.
+* Final output: fully functional Next.js project, ready to deploy.
