@@ -6,14 +6,14 @@ export default function Footer() {
   const { t } = useI18n();
 
   // Contact details
-  const displayPhone = "+39 000 000 0000";
-  const telHref = "tel:+390000000000";
+  const displayPhone = "+39 331 286 7417";
+  const telHref = "tel:+393312867417";
   const email = "info@tusitio.it";
   const address = "Via Teatro Greco, 1, 98039 Taormina (ME), Italia";
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
   // WhatsApp preset message per locale
-  const waNumber = "390000000000"; // E.164 without +
+  const waNumber = "393312867417"; // E.164 without +
   const waText = encodeURIComponent(t("footer.whatsappPreset"));
   const waHref = `https://wa.me/${waNumber}?text=${waText}`;
 
