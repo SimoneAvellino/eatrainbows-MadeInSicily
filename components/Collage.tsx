@@ -69,6 +69,7 @@ export default function Collage() {
                     width={IMG_WIDTH}
                     height={IMG_HEIGHT}
                     className="img-shadow w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </Link>

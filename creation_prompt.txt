@@ -80,7 +80,7 @@ Includes Taormina address, social icons, and a thin Sicilian tile motif divider.
 * Display:
 
   * **Phone:** `+39 000 000 0000`
-  * **Email:** `info@tusitio.it`
+  * **Email:** `madeinsicilyinfo@gmail.com`
   * **WhatsApp button:** `https://wa.me/390000000000`
 * Contact form:
 

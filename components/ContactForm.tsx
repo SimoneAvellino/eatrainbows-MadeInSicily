@@ -28,14 +28,14 @@ export default function ContactForm({ defaultProduct = "" }: { defaultProduct?: 
       <div className="grid gap-8 md:grid-cols-2">
       <div className="space-y-3">
         <p>
-            {t("contact.phone")}: <a className="underline" href="tel:+393312867417">+39 331 286 7417</a>
+            {t("contact.phone")}: <a className="underline" href="tel:+393476097090">+39 347 609 7090</a>
         </p>
         <p>
-            {t("contact.email")}: <a className="underline" href="mailto:info@tusitio.it">info@tusitio.it</a>
+            {t("contact.email")}: <a className="underline" href="mailto:madeinsicilyinfo@gmail.com">madeinsicilyinfo@gmail.com</a>
         </p>
         <p>
           <Link
-            href="https://wa.me/393312867417"
+            href="https://wa.me/393476097090"
             className="inline-block bg-turquoise text-white px-4 py-2 rounded-md hover:bg-sky transition-colors"
           >
               {t("contact.whatsapp")}

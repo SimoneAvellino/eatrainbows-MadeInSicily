@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import en from "@/i18n/dictionaries/en.json";
 import it from "@/i18n/dictionaries/it.json";
-import InfoPage from "@/components/InfoPage";
 import TablesClient from "@/components/TablesClient";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,10 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function TablesPage() {
   return (
     <>
-      {/* Keep the current description on top of the page */}
-      <InfoPage titleKey="nav.tables" descKey="collage.tablesDesc" />
-      {/* Product-style listing of tables */}
-      <section className="container mx-auto pb-16">
+      {/* Space from fixed header so content isn't hidden */}
+      <section className="container mx-auto pb-16 pt-32 md:pt-44">
         <TablesClient />
       </section>
     </>

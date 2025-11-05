@@ -64,8 +64,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       addressCountry: "IT",
     },
     url: siteUrl,
-    telephone: "+39 000 000 0000",
-    email: "info@tusitio.it",
+    telephone: "+39 347 609 7090",
+    email: "madeinsicilyinfo@gmail.com",
     image: [
       `${siteUrl}/assets/images/hero_sicily.webp`
     ],

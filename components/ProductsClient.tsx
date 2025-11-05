@@ -9,13 +9,11 @@ function ImageCard({
   alt,
   width,
   height,
-  priority,
 }: {
   src: string;
   alt: string;
   width: number;
   height: number;
-  priority?: boolean;
 }) {
   return (
     <div className="relative overflow-hidden rounded-2xl shadow-subtle">
@@ -26,7 +24,7 @@ function ImageCard({
         height={height}
         className="w-full h-auto object-cover"
         sizes="(max-width: 768px) 100vw, 50vw"
-        priority={priority}
+        loading="lazy"
       />
     </div>
   );
@@ -62,7 +60,6 @@ export default function ProductsClient() {
         alt={`${p.alt_it} / ${p.alt_en}`}
         width={p.width}
         height={p.height}
-        priority={i === 0}
       />
     );
     const textEl = <TextCard key={`txt-${p.slug}-${i}`} />;
@@ -97,7 +94,6 @@ export default function ProductsClient() {
               alt={`${p.alt_it} / ${p.alt_en}`}
               width={p.width}
               height={p.height}
-              priority={i === 0}
             />
             <TextCard />
           </div>

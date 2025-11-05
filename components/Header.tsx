@@ -17,7 +17,11 @@ export default function Header() {
   const [hideHeader, setHideHeader] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langBtnRef = useRef<HTMLButtonElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
   const { lang, setLang, t } = useI18n();
+  const waveRef = useRef<HTMLDivElement | null>(null);
+  const [waveHeight, setWaveHeight] = useState(0);
 
   // Hide header on scroll down (after small threshold), show ONLY when at top of page
   useEffect(() => {
@@ -42,6 +46,38 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
+  // Track header height so the wave can be positioned exactly under it
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () => setHeaderHeight(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [pathname]);
+
+  // Track wave height to slide it fully out when header hides
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const el = waveRef.current;
+    if (!el) return;
+    const update = () => setWaveHeight(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [pathname]);
+
   const solid = (pathname ?? "").startsWith("/products") || (pathname ?? "").startsWith("/contact") || (pathname ?? "").startsWith("/tables") || (pathname ?? "").startsWith("/ceramics") || (pathname ?? "").startsWith("/artists");
   const bgCls = solid ? "bg-[var(--color-text)]" : "bg-transparent";
 
@@ -60,11 +96,11 @@ export default function Header() {
       </button>
     )}
 
-  <header className={`fixed top-0 inset-x-0 z-50 ${bgCls} text-porcelain transition-transform duration-500 ${hideHeader ? "-translate-y-full" : "translate-y-0"} ${solid ? "pb-6 md:pb-8" : ""}`}>
-      {/* Top row: socials (left) + language selector (right) */}
-  <div className="container mx-auto flex items-center justify-between pt-3 pb-1 px-4 md:px-0">
-        {/* Socials */}
-        <div className="flex items-center gap-4 text-porcelain/90">
+  <header ref={headerRef} className={`fixed top-0 inset-x-0 z-50 ${bgCls} text-porcelain transition-transform duration-500 ${hideHeader ? "-translate-y-full" : "translate-y-0"}`}>
+      {/* Top row: socials (left) + centered logo + language selector (right) */}
+  <div className="container mx-auto grid grid-cols-3 items-center pt-2 pb-2 px-4 md:px-0">
+        {/* Socials (left) */}
+        <div className="flex items-center gap-4 text-porcelain/90 justify-self-start">
           <Link aria-label="Instagram" href="#" className="hover:text-sunshine transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm5.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/></svg>
           </Link>
@@ -73,8 +109,23 @@ export default function Header() {
           </Link>
         </div>
 
+        {/* Centered logo */}
+        <div className="flex items-center justify-center">
+          <Link href="/" className="flex items-center" aria-label="Taormina – Lava Stone & Ceramics home">
+            <Image
+              src="/assets/images/logo.png"
+              alt="Logo Taormina – Lava Stone & Ceramics"
+              width={360}
+              height={86}
+              priority
+              className="h-10 md:h-14 w-auto"
+              sizes="(max-width: 768px) 220px, 360px"
+            />
+          </Link>
+        </div>
+
         {/* Right: language + mobile toggle */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-self-end">
           <div className="hidden sm:block relative">
             <button
               ref={langBtnRef}
@@ -131,25 +182,9 @@ export default function Header() {
           </button>
         </div>
       </div>
-
-      {/* Middle: centered logo */}
-  <div className="container mx-auto flex items-center justify-center py-0.5 px-4 md:px-0">
-        <Link href="/" className="flex items-center" aria-label="Taormina – Lava Stone & Ceramics home">
-          <Image
-            src="/assets/images/logo.png"
-            alt="Logo Taormina – Lava Stone & Ceramics"
-            width={420}
-            height={100}
-            priority
-            className="h-12 md:h-16 w-auto"
-            sizes="(max-width: 768px) 260px, 420px"
-          />
-        </Link>
-      </div>
-
-      {/* Bottom: centered nav (desktop) */}
+      {/* Bottom: centered nav (desktop) - moved closer to top and tightened spacing */}
       <nav aria-label="Main navigation" className="hidden md:block">
-  <ul className="container mx-auto flex items-center justify-center gap-8 py-0.5 text-porcelain">
+  <ul className="container mx-auto flex items-center justify-center gap-8 py-1 text-porcelain">
               {[{ href: "/", label: t("nav.home") }, { href: "/tables", label: t("nav.tables") }, { href: "/ceramics", label: t("nav.ceramics") }, { href: "/artists", label: t("nav.artists") }, { href: "/products", label: t("nav.products") }, { href: "/contact", label: t("nav.contact") }].map((item) => {
             const active = pathname === item.href;
             return (
@@ -167,9 +202,19 @@ export default function Header() {
         </ul>
       </nav>
     </header>
-    {/* Curvy bottom edge for solid headers (products/contact) - always rendered, animated with header */}
+    {/* Curvy bottom edge for solid headers (products/contact) - positioned dynamically based on header height */}
     {solid && (
-      <div aria-hidden className={`pointer-events-none fixed top-[118px] md:top-[138px] inset-x-0 z-40 h-12 md:h-20 transition-transform duration-500 ${hideHeader ? "-translate-y-[200px] md:-translate-y-[250px]" : "translate-y-0"}`}>
+      <div
+        aria-hidden
+        ref={waveRef}
+        className={`pointer-events-none fixed inset-x-0 z-40 h-12 md:h-20 transition-transform duration-500`}
+        style={{
+          top: headerHeight || 0,
+          transform: hideHeader
+            ? `translateY(-${(headerHeight || 0) + (waveHeight || 0)}px)`
+            : "translateY(0)",
+        }}
+      >
         <svg
           className="w-full h-full scale-y-[-1]"
           viewBox="0 0 1440 100"
@@ -185,43 +230,50 @@ export default function Header() {
     )}
     {/* Global overlay menu rendered outside the header so it works even when header is hidden */}
     {mobileOpen && (
-      <div className="fixed inset-0 z-[80] bg-black/70">
-        <div className="absolute top-0 inset-x-0 p-4 flex items-center justify-between">
+      <div className="fixed inset-0 z-[80] bg-[var(--color-text)] text-porcelain flex flex-col" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        {/* Close button */}
+        <button
+          className="absolute top-4 right-4 inline-flex items-center justify-center w-10 h-10 rounded-md bg-porcelain/10 hover:bg-porcelain/20 focus:outline-none focus:ring-2 focus:ring-sunshine"
+          aria-label="Close menu"
+          onClick={() => setMobileOpen(false)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2" aria-hidden>
+            <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+
+        {/* Fullscreen navigation with centered logo */}
+        <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
           <Link href="/" className="flex items-center" onClick={() => setMobileOpen(false)} aria-label="Home">
             <Image
               src="/assets/images/logo.png"
               alt="Logo Taormina – Lava Stone & Ceramics"
-              width={280}
-              height={68}
-              className="h-12 w-auto"
-              sizes="280px"
+              width={420}
+              height={100}
+              className="h-20 md:h-28 w-auto"
+              sizes="(max-width: 768px) 320px, 420px"
             />
           </Link>
-          <button
-            className="inline-flex items-center justify-center w-9 h-9 rounded-md bg-porcelain/10 hover:bg-porcelain/20 text-porcelain focus:outline-none focus:ring-2 focus:ring-sunshine"
-            aria-label="Close menu"
-            onClick={() => setMobileOpen(false)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2" aria-hidden>
-              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18"/>
-            </svg>
-          </button>
-        </div>
-        <div className="absolute top-16 inset-x-4 md:inset-x-20 lg:inset-x-40 rounded-2xl bg-porcelain/90 text-cobalt p-6 shadow-subtle">
-          <ul className="grid gap-4 text-center">
+          <ul className="w-full max-w-md">
             {[{ href: "/", label: t("nav.home") }, { href: "/tables", label: t("nav.tables") }, { href: "/ceramics", label: t("nav.ceramics") }, { href: "/artists", label: t("nav.artists") }, { href: "/products", label: t("nav.products") }, { href: "/contact", label: t("nav.contact") }].map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-lg font-medium" onClick={() => setMobileOpen(false)}>
+              <li key={item.href} className="border-t border-porcelain/15 first:border-t-0">
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block w-full text-center py-5 text-2xl uppercase tracking-wider hover:text-sunshine focus:outline-none focus:ring-2 focus:ring-sunshine/70"
+                >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex items-center justify-center gap-3 text-sm">
-            <button onClick={() => setLang("it")} className={`uppercase ${lang === "it" ? "text-cobalt" : "text-cobalt/60"}`}>IT</button>
-            <span className="text-cobalt/30">|</span>
-            <button onClick={() => setLang("en")} className={`uppercase ${lang === "en" ? "text-cobalt" : "text-cobalt/60"}`}>EN</button>
-          </div>
+        </nav>
+
+        {/* Language toggle footer */}
+        <div className="p-6 flex items-center justify-center gap-4 text-sm">
+          <button onClick={() => setLang("it")} className={`uppercase ${lang === "it" ? "text-porcelain" : "text-porcelain/60"}`}>IT</button>
+          <span className="text-porcelain/30">|</span>
+          <button onClick={() => setLang("en")} className={`uppercase ${lang === "en" ? "text-porcelain" : "text-porcelain/60"}`}>EN</button>
         </div>
       </div>
     )}

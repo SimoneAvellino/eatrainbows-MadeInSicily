@@ -61,5 +61,33 @@
   "meta.ceramics.title": "Ceramiche – Taormina",
   "meta.ceramics.description": "Maioliche siciliane artigianali con motivi mediterranei e smalti vivaci.",
   "meta.artists.title": "I nostri artisti – Taormina",
-  "meta.artists.description": "Conosci gli artigiani di Taormina che progettano, smaltano e dipingono ogni pezzo."
+  "meta.artists.description": "Conosci gli artigiani di Taormina che progettano, smaltano e dipingono ogni pezzo.",
+  "tables.sections.essenze_siciliane.title": "Essenze Siciliane",
+  "tables.sections.essenze_siciliane.desc": "Ispirata alle bellezze naturali, ai colori e alla tradizione artistica della nostra isola.",
+  "tables.sections.colate_laviche.title": "Colate Laviche",
+  "tables.sections.colate_laviche.desc": "Ispirata all’“eruzione” di colori e\nalle visioni surreali che ci offre il nostro\nvulcano Etna con le sue colate laviche,\nle cosiddette “lingue di fuoco”",
+  "tables.sections.golden_etna.title": "Golden Etna",
+  "tables.sections.golden_etna.desc": "Ispirata al design moderno e contemporaneo del Made in Italy,\nrifinita in oro e platino con la tecnica del terzo fuoco che prevede\nuna seconda cottura a una temperatura di 750° con la quale si\nottiene la fusione di questi preziosi smalti.",
+
+  "tables.field.title": "Titolo",
+  "tables.field.dimension": "Dimensioni",
+  "tables.field.weight": "Peso",
+  "tables.field.thickness": "Spessore",
+  "tables.field.paintingTechnique": "Tecnica di pittura",
+  "tables.field.formats": "Formati",
+
+  "tables.painting.hand_painted_glaze": "Smalto dipinto a mano",
+
+  "tables.format.line": "da {from} a {to} spessore {thickness} cm",
+  "tables.format.from_to": "da {from} a {to}",
+  "tables.format.thickness_line": "spessore {thickness} cm",
+
+  "tables.filter.label": "Categoria",
+  "tables.filter.all": "Tutte le categorie",
+  "tables.filter.shape": "Forma",
+  "tables.filter.shapeAll": "Tutte le forme",
+  "tables.shape.circle": "Cerchio",
+  "tables.shape.ellipse": "Ellisse",
+  "tables.shape.square": "Quadrato",
+  "tables.shape.rectangle": "Rettangolo"
 }
