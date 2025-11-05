@@ -25,7 +25,8 @@ export default function TableFormatPreview({ format }: { format: TableFormat }) 
   return (
     <div className="flex items-center gap-1 md:gap-2 text-neutral-800">
       <ShapeSvg shape={format.shape} />
-      <p className="font-medium leading-snug">
+      {/* Hide textual details on phones; show only the shape */}
+      <p className="hidden md:block font-medium leading-snug">
         <span>{line1}</span>
         <span className="block">{line2}</span>
       </p>
