@@ -79,7 +79,7 @@ export default function TablesClient() {
               aria-label={t("tables.filter.shape")}
               className="w-full appearance-none bg-transparent border-0 border-b-2 border-cobalt text-cobalt px-1 pr-7 py-1 text-sm md:text-base focus:outline-none focus:border-cobalt"
               value={shape}
-              onChange={(e) => setShape(e.target.value as any)}
+              onChange={(e) => setShape(e.target.value as Shape | "all")}
             >
               <option value="all">{t("tables.filter.shapeAll")}</option>
               <option value="circle">{t("tables.shape.circle")}</option>

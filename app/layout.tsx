@@ -2,18 +2,14 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Playfair_Display } from "next/font/google";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { localSerif, localSans } from "@/app/fonts";
 import { cookies } from "next/headers";
-// To switch to a local downloaded serif font instead of Playfair Display:
+// To switch to a different local serif font:
 // 1) Drop your font files into /public/fonts/
 // 2) Use the template in app/fonts.ts to configure next/font/local
-// 3) Import { localSerif } from "@/app/fonts" and swap playfair.variable below with localSerif.variable
+// 3) Import { localSerif } from "@/app/fonts" and use its CSS variable on the <html> element
 // import { localSerif } from "@/app/fonts";
-
-// Keep Playfair available if needed, but titles will use the local serif via --font-serif
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 const siteUrl = "https://example.com";
 
@@ -73,8 +69,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-  // Apply local serif (titles) and local sans (Poiret One) for body text
-  <html lang={initialLang} className={`${localSerif.variable} ${localSans.variable}`}>
+    // Apply local serif (titles) and local sans (Poiret One) for body text
+    <html lang={initialLang} className={`${localSerif.variable} ${localSans.variable}`}>
       <body className="font-sans min-h-screen flex flex-col">
         <I18nProvider initialLang={initialLang as "en" | "it"}>
           <Header />
