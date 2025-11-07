@@ -76,7 +76,13 @@
   "tables.field.paintingTechnique": "Tecnica di pittura",
   "tables.field.formats": "Formati",
 
-  "tables.painting.hand_painted_glaze": "Smalto dipinto a mano",
+  "tables.painting.pittura_su_smalto": "Pittura su smalto ceramico tradizionale",
+  "tables.painting.smalti_vari": "Applicazione di smalti vari",
+  "tables.painting.smalto_blu": "Pittura su smalto blu",
+  "tables.painting.smalto_vetrificato": "Pittura su smalto vetrificato",
+  "tables.painting.mista": "Mista",
+  "tables.painting.lustri_e_smalto": "Lustri su cristallina e pittura su smalto",
+  "tables.painting.lustri": "Lustri su cristallina",
 
   "tables.format.line": "da {from} a {to} spessore {thickness} cm",
   "tables.format.from_to": "da {from} a {to}",

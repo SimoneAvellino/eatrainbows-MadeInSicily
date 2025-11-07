@@ -76,7 +76,12 @@
   "tables.field.paintingTechnique": "Painting technique",
   "tables.field.formats": "Formats",
 
-  "tables.painting.hand_painted_glaze": "Hand-painted glaze",
+  "tables.painting.pittura_su_smalto": "Hand-painted ceramic glaze",
+  "tables.painting.smalti_vari": "Application of various glazes",
+  "tables.painting.smalto_blu": "Painting on blue glaze",
+  "tables.painting.smalto_vetrificato": "Painting on vitrified glaze",
+  "tables.painting.mista": "Mixed",
+  "tables.painting.lustri": "Lusters on crystalline and painting on glaze",
 
   "tables.format.line": "from {from} to {to} thickness {thickness} cm",
   "tables.format.from_to": "from {from} to {to}",
