@@ -9,21 +9,24 @@ export default function TableEntry({ item, index }: { item: TableItem; index: nu
   const { t, lang } = useI18n();
 
   const image = (
-    <div className="relative w-full max-w-full overflow-hidden md:overflow-visible">
+    <div
+      className="relative w-full h-[38dvh] md:h-full overflow-hidden rounded-2xl flex items-center justify-center"
+      /* Image scales to fit the half-card height (full height on desktop) without cropping */
+    >
       <Image
         src={item.image.src}
         alt={lang === "it" ? item.image.alt_it : item.image.alt_en}
-        width={item.image.width}
-        height={item.image.height}
-        className="w-full h-auto object-contain"
-        loading="lazy"
+        fill
+        className="object-contain object-center"
         sizes="(max-width: 768px) 100vw, 50vw"
+        priority={index === 0}
+        loading={index === 0 ? undefined : "lazy"}
       />
     </div>
   );
 
   const details = (
-    <div className="space-y-3 md:space-y-4 self-center w-full max-w-full">
+    <div className="space-y-3 md:space-y-4 self-center w-full max-w-full md:h-full md:flex md:flex-col md:justify-center">
       <h3 className="font-serif text-2xl md:text-3xl text-cobalt">{item.title}</h3>
       <div className="text-base md:text-lg opacity-90 space-y-2">
         <div className="grid grid-cols-2 gap-2 md:gap-3">
@@ -49,7 +52,7 @@ export default function TableEntry({ item, index }: { item: TableItem; index: nu
   );
 
   return (
-    <div className="grid md:grid-cols-2 gap-3 md:gap-12 items-center">
+    <div className="grid md:grid-cols-2 gap-3 md:gap-12 items-center md:items-stretch md:h-full">
       {/* Always render image first in DOM so on mobile it appears above the description */}
       <div className={index % 2 === 0 ? "md:order-1" : "md:order-2"}>{image}</div>
       <div className={index % 2 === 0 ? "md:order-2" : "md:order-1"}>{details}</div>
