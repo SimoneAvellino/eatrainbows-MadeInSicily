@@ -20,6 +20,7 @@ export default function TableCard({ index, isLast = false, children }: Props) {
 	return (
 		<section
 			style={{ zIndex: z, backfaceVisibility: "hidden" }}
+			data-last={isLast ? "true" : undefined}
 			className={[
 				"sticky",
 						"top-24 md:top-1/2 md:-translate-y-1/2",
