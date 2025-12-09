@@ -1,6 +1,7 @@
 import { essenzeSiciliane } from "./essenze_siciliane";
 import { colateLaviche } from "./colate_laviche";
 import { goldenEtna } from "./golden_etna";
+import { novit } from "./novit";
 export * from "./types";
 
 export const tableSections = [
@@ -10,6 +11,7 @@ export const tableSections = [
   essenzeSiciliane,
   colateLaviche,
   goldenEtna,
+  novit,
 ];
 
-export { essenzeSiciliane, colateLaviche, goldenEtna };
+export { essenzeSiciliane, colateLaviche, goldenEtna, novit };
